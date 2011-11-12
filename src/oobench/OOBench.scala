@@ -18,7 +18,7 @@ object OOBench extends App {
     val endTime = System.nanoTime
     val time = endTime - startTime
     val avgTime: Double = time / n / 1000d
-    printf("  executions: %07d; avg time = %.2f micros%n", n, avgTime)
+    printf("  executions: %07d; avg time = %.2f micros%n", n, avgTime, result)
   }
 
   if (args.length >= 1 && args(0) == "-pause") {
