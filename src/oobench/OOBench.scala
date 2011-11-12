@@ -22,7 +22,7 @@ object OOBench extends App {
   }
 
   if (args.length >= 1 && args(0) == "-pause") {
-    readLine("Press any key ...")
+    readLine("Press Enter to begin ...")
   }
 
   val factories = List[SHA1Factory](
