@@ -6,11 +6,7 @@ object SHA1Test extends App {
   private def toHexByte(sb: StringBuilder, a: Byte) = sb.append(hexMap((a>>4)&0xF)).append(hexMap(a&0xF))
   def toHex(a: Array[Byte]) = a.foldLeft(new StringBuilder(a.length * 2))(toHexByte _).toString
 
-  type SHA1Type = {
-    def update(bytes: Array[Byte]): Unit
-    def digest(): Array[Byte]
-  }
-  class FoxTest(sha1: SHA1Type) {
+  class FoxTest(sha1: oobench.SHA1) {
     val fox = "The quick brown fox jumped over the lazy dog.\n".getBytes()
 
     sha1.update(fox)

@@ -5,6 +5,9 @@ import oobench.scala.ootypes._
 object SHA1 {
 	val s_pad0x80 = Array[Byte]( 0x80.asInstanceOf[Byte] )
 	val s_pad0x00 = Array[Byte]( 0x00 )
+
+	val name = "scalafor.objects"
+	def apply() = new SHA1
 }
 
 class SHA1 {
