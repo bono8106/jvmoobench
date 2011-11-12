@@ -6,7 +6,7 @@ object SHA1 {
 	val s_pad0x80 = Array[Byte]( 0x80.asInstanceOf[Byte] )
 	val s_pad0x00 = Array[Byte]( 0x00 )
 
-	val name = "scalawhile.objects2"
+	val name = "Scala using WHILE loops with OBJECTS (including loop COUNTER variables)"
 	def apply() = new SHA1
 }
 
