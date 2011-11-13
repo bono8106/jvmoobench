@@ -1,8 +1,9 @@
 package object oobench {
 
   type SHA1 = {
+    def reset(): Unit
     def update(bytes: Array[Byte]): Unit
-    def digest(): Array[Byte]
+    def digest(hashout: Array[Byte]): Unit
   }
 
   type SHA1Factory = {

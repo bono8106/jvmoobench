@@ -33,14 +33,22 @@ public class SHA1
 	// -----------------------------------------------------------------
 	public SHA1()
 	{	m_h = new int[5];
+		m_w = new int[80];
+		reset();
+ 	}
+
+	// -----------------------------------------------------------------
+	// Resets the internal state to its initial values.
+	// -----------------------------------------------------------------
+	public void reset()
+	{	m_lBitCount=0;  m_iLenW=0;
 		m_h[0]=0x67452301;
 		m_h[1]=0xefcdab89;
 		m_h[2]=0x98badcfe;
 		m_h[3]=0x10325476;
 		m_h[4]=0xc3d2e1f0;
-		m_w = new int[80];
 		for (int i=0;i<m_w.length;i++)  m_w[i]=0;
- 	}
+	}
 
 	// -----------------------------------------------------------------
 	// Adds more data to the hash.
@@ -64,8 +72,10 @@ public class SHA1
 	// -----------------------------------------------------------------
 	// Complete the hash and get the final digest (resets internal state).
 	// -----------------------------------------------------------------
-	public byte[] digest()
-	{	byte[] padlen = new byte[8];
+	private final byte[] padlen = new byte[8];
+	public void digest(byte[] hashout)
+	{
+		if (hashout == null || hashout.length < 20) throw new IllegalArgumentException();
 
 		padlen[0]=(byte)((m_lBitCount >> 56) & 0xFF);
 		padlen[1]=(byte)((m_lBitCount >> 48) & 0xFF);
@@ -83,13 +93,12 @@ public class SHA1
 		update(padlen,0,8);
 
 		// -----Create output hash
-		byte[] hashout = new byte[20];
 		for (int i=0;i<20;i++)
 		{	hashout[i] = (byte)(m_h[i/4] >> 24);
 			m_h[i/4] <<= 8;
 		}
 
-		return  hashout;
+		reset();
 	}
 
 	// -----------------------------------------------------------------

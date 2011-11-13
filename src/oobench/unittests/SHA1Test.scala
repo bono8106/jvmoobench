@@ -9,17 +9,22 @@ object SHA1Test extends App {
   class FoxTest(sha1: oobench.SHA1) {
     val fox = "The quick brown fox jumped over the lazy dog.\n".getBytes()
 
-    sha1.update(fox)
-    val foxHash = toHex(sha1.digest)
-    val x = ""
-    assert (foxHash == "bae5ed658ab3546aee12f23f36392f35dba1ebdd")
+    for (i <- 1 to 3) {
+      sha1.update(fox)
+      val hashout = new Array[Byte](20)
+      sha1.digest(hashout)
+      val foxHash = toHex(hashout)
+      assert (foxHash == "bae5ed658ab3546aee12f23f36392f35dba1ebdd")
+    }
   }
 
+  print("Running tests ... ")
   new FoxTest(new oobench.javafor.valuetypes.SHA1)
   new FoxTest(new oobench.scalafor.valuetypes.SHA1)
   new FoxTest(new oobench.scalafor.objects.SHA1)
   new FoxTest(new oobench.scalawhile.valuetypes.SHA1)
   new FoxTest(new oobench.scalawhile.objects.SHA1)
   new FoxTest(new oobench.scalawhile.objects2.SHA1)
+  println("SUCCESS")
 
 }

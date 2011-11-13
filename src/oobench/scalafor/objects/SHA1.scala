@@ -21,12 +21,20 @@ class SHA1 {
 	// -----------------------------------------------------------------
 	// CONSTRUCTOR
 	// -----------------------------------------------------------------
-	m_h(0)=0x67452301;
-	m_h(1)=0xefcdab89;
-	m_h(2)=0x98badcfe;
-	m_h(3)=0x10325476;
-	m_h(4)=0xc3d2e1f0;
-	for (i <- 0 until m_w.length)  m_w(i)=0;
+	reset();
+
+	// -----------------------------------------------------------------
+	// Resets the internal state to its initial values.
+	// -----------------------------------------------------------------
+	def reset()
+	{	m_lBitCount=0;  m_iLenW=0;
+		m_h(0)=0x67452301;
+		m_h(1)=0xefcdab89;
+		m_h(2)=0x98badcfe;
+		m_h(3)=0x10325476;
+		m_h(4)=0xc3d2e1f0;
+		for (i <- 0 until m_w.length)  m_w(i)=0;
+	}
 
 	// -----------------------------------------------------------------
 	// Adds more data to the hash.
@@ -49,8 +57,10 @@ class SHA1 {
 	// -----------------------------------------------------------------
 	// Complete the hash and get the final digest (resets internal state).
 	// -----------------------------------------------------------------
-	def digest(): Array[Byte] =
-	{	val padlen = new Array[Byte](8);
+	val padlen = new Array[Byte](8);
+	def digest(hashout: Array[Byte])
+	{
+		if (hashout == null || hashout.length < 20) throw new IllegalArgumentException();
 
 		padlen(0)=((m_lBitCount >> 56) & 0xFF)
 		padlen(1)=((m_lBitCount >> 48) & 0xFF)
@@ -68,13 +78,12 @@ class SHA1 {
 		update(padlen,0,8)
 
 		// -----Create output hash
-		val hashout = new Array[Byte](20);
 		for (i <- 0 until 20)
 		{	hashout(i) = (m_h(i/4) >> 24)
 			m_h(i/4) <<= 8
 		}
 
-		return  hashout;
+		reset();
 	}
 
 	// -----------------------------------------------------------------

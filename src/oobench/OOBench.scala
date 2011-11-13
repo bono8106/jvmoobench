@@ -8,10 +8,12 @@ object OOBench extends App {
 
     var result = 0
     var i = 1
+    val sha1 = factory()
+    val shaout = new Array[Byte](20)
     while (i <= n) {
-      val sha1 = factory()
       sha1.update(fox)
-      result += sha1.digest.length
+      sha1.digest(shaout)
+      result += shaout.length
       i += 1
     }
 
@@ -39,6 +41,7 @@ object OOBench extends App {
     doIt(fac, 10000)
     doIt(fac, 100000)
     doIt(fac, 1000000)
+    doIt(fac, 3000000)
   }
 
 }
