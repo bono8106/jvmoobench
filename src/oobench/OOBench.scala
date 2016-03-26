@@ -1,5 +1,15 @@
 package oobench
 
+trait SHA1 {
+  def update(bytes: Array[Byte]): Unit
+  def digest(): Array[Byte]
+}
+
+trait SHA1Factory {
+  def name: String
+  def apply(): SHA1
+}
+
 object OOBench extends App {
 
   def doIt(factory: SHA1Factory, n: Int) {
@@ -22,7 +32,7 @@ object OOBench extends App {
   }
 
   if (args.length >= 1 && args(0) == "-pause") {
-    readLine("Press Enter to begin ...")
+    io.StdIn.readLine("Press Enter to begin ...")
   }
 
   val factories = List[SHA1Factory](

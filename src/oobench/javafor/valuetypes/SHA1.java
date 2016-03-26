@@ -20,7 +20,7 @@ package oobench.javafor.valuetypes;
 // else's) and simplified it to remove test code and objects when
 // not actually being debugged (to reduce its deployment footprint!)
 // *********************************************************************
-public class SHA1
+public class SHA1 implements oobench.SHA1
 {	private final int[] m_h , m_w;
 	private int m_iLenW;
 	private long m_lBitCount;

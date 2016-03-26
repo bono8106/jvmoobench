@@ -1,6 +1,8 @@
 package oobench.scala.ootypes
 
 object LongObject {
+  import language.implicitConversions
+
   implicit def wrap(n: Long) = new LongObject(n)
   implicit def unwrap(n: LongObject) = n.n
 

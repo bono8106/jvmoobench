@@ -2,7 +2,7 @@ package oobench.scalawhile.objects
 
 import oobench.scala.ootypes._
 
-object SHA1 {
+object SHA1 extends oobench.SHA1Factory {
 	val s_pad0x80 = Array[Byte]( 0x80.asInstanceOf[Byte] )
 	val s_pad0x00 = Array[Byte]( 0x00 )
 
@@ -10,7 +10,7 @@ object SHA1 {
 	def apply() = new SHA1
 }
 
-class SHA1 {
+class SHA1 extends oobench.SHA1 {
 
 	val m_h = new Array[IntObject](5)
 	val m_w = new Array[IntObject](80)

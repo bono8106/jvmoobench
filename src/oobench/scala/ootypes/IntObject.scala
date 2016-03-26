@@ -1,6 +1,8 @@
 package oobench.scala.ootypes
 
 object IntObject {
+  import language.implicitConversions
+
   implicit def wrap(n: Int) = new IntObject(n)
   implicit def unwrap(n: IntObject) = n.n
 
